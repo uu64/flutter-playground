@@ -22,7 +22,7 @@ class RandomWords extends StatefulWidget {
 }
 
 class _RandomWordsState extends State<RandomWords> {
-  String _label = "";
+  String _label = WordPair.random().asPascalCase;
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +42,8 @@ class _RandomWordsState extends State<RandomWords> {
   }
 
   void _reload() {
-    final _wordPair = WordPair.random();
     setState(() {
-      _label = _wordPair.asPascalCase;
+      _label = WordPair.random().asPascalCase;
     });
   }
 }
