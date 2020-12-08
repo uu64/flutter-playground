@@ -24,6 +24,7 @@ class RandomWords extends StatefulWidget {
 class _RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
   final _biggerFont = TextStyle(fontSize: 18.0);
+  final _wordPair = WordPair.random();
 
   @override
   Widget build(BuildContext context) {
@@ -31,30 +32,18 @@ class _RandomWordsState extends State<RandomWords> {
       appBar: AppBar(
         title: Text('Startup Name Generator'),
       ),
-      body: _buildSuggestions(),
+      body: Center(
+        child: _buildSuggestions(),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        // onPressed: _incrementCounter,
+        label: Text('Reload'),
+        icon: Text('\u{1F37A}'),
+      ),
     );
   }
 
   Widget _buildSuggestions() {
-    return ListView.builder(
-        padding: EdgeInsets.all(16.0),
-        itemBuilder: /*1*/ (context, i) {
-          if (i.isOdd) return Divider(); /*2*/
-
-          final index = i ~/ 2; /*3*/
-          if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(10)); /*4*/
-          }
-          return _buildRow(_suggestions[index]);
-        });
-  }
-
-  Widget _buildRow(WordPair pair) {
-    return ListTile(
-      title: Text(
-        pair.asPascalCase,
-        style: _biggerFont,
-      ),
-    );
+    return Text(_wordPair.asPascalCase);
   }
 }
