@@ -22,9 +22,7 @@ class RandomWords extends StatefulWidget {
 }
 
 class _RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-  final _biggerFont = TextStyle(fontSize: 18.0);
-  final _wordPair = WordPair.random();
+  String _label = "";
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +31,20 @@ class _RandomWordsState extends State<RandomWords> {
         title: Text('Startup Name Generator'),
       ),
       body: Center(
-        child: _buildSuggestions(),
+        child: Text('$_label'),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        // onPressed: _incrementCounter,
+        onPressed: _reload,
         label: Text('Reload'),
         icon: Text('\u{1F37A}'),
       ),
     );
   }
 
-  Widget _buildSuggestions() {
-    return Text(_wordPair.asPascalCase);
+  void _reload() {
+    final _wordPair = WordPair.random();
+    setState(() {
+      _label = _wordPair.asPascalCase;
+    });
   }
 }
